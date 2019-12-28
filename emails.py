@@ -26,10 +26,10 @@ company_lst = list(pd.read_excel("Company List.xlsx")['Company'])
 #Change this list according to titles you want to scrape for
 TITLES = ["Data Scientist", "Director", "Manager"]
 #Change this number to determine the scrape page depth on Linkedin
-PAGE_DEPTH = 5
+PAGE_DEPTH = 7
 #Change this to your LinkedIn Account
-USERNAME_AUTH = "abhiraob@gmail.com"
-PASSWORD_AUTH = "letme1nbr0"
+USERNAME_AUTH = "linkedin.user@gmail.com"
+PASSWORD_AUTH = "linkedin.password"
 #Change this to your Webdriver Path
 DRIVER_PATH = '/Users/ericgan/Documents/DSS/email_scraper/chromedriver'
 
@@ -73,7 +73,6 @@ def scrape(driver, url, row, company):
         else:
             page_url = title_url + "&page=" + str(page)
         # print("Scraping this URL: " + page_url)
-        print(page)
         driver.get(page_url)
         time.sleep(2)
         
