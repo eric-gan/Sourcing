@@ -31,7 +31,7 @@ PAGE_DEPTH = 7
 USERNAME_AUTH = "linkedin.user@gmail.com"
 PASSWORD_AUTH = "linkedin.password"
 #Change this to your Webdriver Path
-DRIVER_PATH = '/Users/ericgan/Documents/DSS/email_scraper/chromedriver'
+DRIVER_PATH = '/path/to/webdriver/'
 
 #Initialize sourcing notebook
 workbook = openpyxl.Workbook()
