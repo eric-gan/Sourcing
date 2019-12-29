@@ -64,6 +64,8 @@ class Sourcer:
                         )['data']['pattern'] + '@' + domain_resp.json()['data']['domain']
                     except:
                         pattern = None
+                    email_address_map[company] = pattern
+                    continue
                     
             try:
                 pattern = hunter_resp.json(
