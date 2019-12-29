@@ -48,7 +48,9 @@ class Sourcer:
             hunter_resp = requests.get(
                 'https://api.hunter.io/v2/domain-search?company=' + company + '&api_key=' + self.hunter_api_key)
             if hunter_resp.status_code != 200:
-                raise ApiError('GET /tasks/ {}'.format(resp.status_code))
+                email_address_map[company] = None
+                continue
+                # raise ApiError('GET /tasks/ {}'.format(resp.status_code))
             try:
                 pattern = hunter_resp.json(
                 )['data']['pattern'] + '@' + hunter_resp.json()['data']['domain']
@@ -59,7 +61,7 @@ class Sourcer:
         # Replace email address column with valid emails
         self.client_info_df['Email Address'] = self.client_info_df.apply(
             lambda row: replace_email_format(row['Company'], row['First Name'], row['Last Name']), axis=1)
-        print(self.client_info_df)
+        # print(self.client_info_df)
 
         # Write Email Addresses Only to output CSV (debugging)
         # email_address_df = self.client_info_df['Email Address']
