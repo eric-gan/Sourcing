@@ -16,15 +16,15 @@ class Sourcer:
 
     # Read existing client info csv into dataframe
     # Assuming client_info is all filled in except for email address (Columns: First Name, Last Name, Full Name, Company)
-    def read_client_info_csv(self, path):
+    def read_client_info_csv(self, path, custom_pattern=None):
         self.client_info_df = pd.read_csv(path, delimiter=',', encoding="utf8")
         # Remove nan rows with at least 5 non Nan values in columns
         self.client_info_df = self.client_info_df.dropna(thresh=5)
-        self.fill_emails()
+        self.fill_emails(custom_pattern)
 
     # Fills emails based on client_info_csv using hunter.io API, mutates existing objects client_info_df
     # Writes only sourced email addresses as CSV to Emails.csv
-    def fill_emails(self):
+    def fill_emails(self, custom_pattern=None):
 
         # Applied function to get email for individual based on company pattern
         def replace_email_format(company, firstName, lastName):
@@ -42,37 +42,40 @@ class Sourcer:
 
         # Read email address mappings
         email_address_map = {}
-        companies = self.client_info_df.Company.unique()
-        for company in companies:
-            # API call to Hunter.io to get email format
-            hunter_resp = requests.get(
-                'https://api.hunter.io/v2/domain-search?company=' + company + '&api_key=' + self.hunter_api_key)
-            if hunter_resp.status_code != 200:
-                domain_name = input(company + ' not found. Try domain name (e.g hunter.io, google.com, twitch.tv) or type \'no\' to leave blank: ')
-                if domain_name == 'no':
-                    email_address_map[company] = None
-                    continue
-                else:
-                    domain_resp = requests.get(
-                    'https://api.hunter.io/v2/domain-search?domain=' + domain_name + '&api_key=' + self.hunter_api_key)
-                    if domain_resp.status_code != 200:
+        if custom_pattern == None:
+            companies = self.client_info_df.Company.unique()
+            for company in companies:
+                # API call to Hunter.io to get email format
+                hunter_resp = requests.get(
+                    'https://api.hunter.io/v2/domain-search?company=' + company + '&api_key=' + self.hunter_api_key)
+                print(hunter_resp)
+                if hunter_resp.status_code != 200:
+                    domain_name = input(company + ' not found. Try domain name (e.g hunter.io, google.com, twitch.tv) or type \'no\' to leave blank: ')
+                    if domain_name == 'no':
                         email_address_map[company] = None
                         continue
-                        # raise ApiError('GET /tasks/ {}'.format(resp.status_code))
-                    try:
-                        pattern = domain_resp.json(
-                        )['data']['pattern'] + '@' + domain_resp.json()['data']['domain']
-                    except:
-                        pattern = None
-                    email_address_map[company] = pattern
-                    continue
-                    
-            try:
-                pattern = hunter_resp.json(
-                )['data']['pattern'] + '@' + hunter_resp.json()['data']['domain']
-            except:
-                pattern = None
-            email_address_map[company] = pattern
+                    else:
+                        domain_resp = requests.get(
+                        'https://api.hunter.io/v2/domain-search?domain=' + domain_name + '&api_key=' + self.hunter_api_key)
+                        if domain_resp.status_code != 200:
+                            email_address_map[company] = None
+                            continue
+                            # raise ApiError('GET /tasks/ {}'.format(resp.status_code))
+                        try:
+                            pattern = domain_resp.json(
+                            )['data']['pattern'] + '@' + domain_resp.json()['data']['domain']
+                        except:
+                            pattern = None
+                        email_address_map[company] = pattern
+                        continue
+                try:
+                    pattern = hunter_resp.json(
+                    )['data']['pattern'] + '@' + hunter_resp.json()['data']['domain']
+                except:
+                    pattern = None
+                email_address_map[company] = pattern
+        else:
+            email_address_map = custom_pattern
 
         # Replace email address column with valid emails
         self.client_info_df['Email Address'] = self.client_info_df.apply(
