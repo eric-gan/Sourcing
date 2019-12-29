@@ -48,9 +48,13 @@ class Sourcer:
             hunter_resp = requests.get(
                 'https://api.hunter.io/v2/domain-search?company=' + company + '&api_key=' + self.hunter_api_key)
             if hunter_resp.status_code != 200:
-                email_address_map[company] = None
-                continue
-                # raise ApiError('GET /tasks/ {}'.format(resp.status_code))
+                domain_name = input(company + ' not found. Try domain name (e.g hunter.io, google.com, twitch.tv): ')
+                domain_resp = requests.get(
+                    'https://api.hunter.io/v2/domain-search?domain=' + domain_name + '&api_key=' + self.hunter_api_key)
+                if domain_resp.status_code != 200:
+                    email_address_map[company] = None
+                    continue
+                    # raise ApiError('GET /tasks/ {}'.format(resp.status_code))
             try:
                 pattern = hunter_resp.json(
                 )['data']['pattern'] + '@' + hunter_resp.json()['data']['domain']
