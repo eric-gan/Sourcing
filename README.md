@@ -1,7 +1,7 @@
 # Sourcing
 The following repository provides an automated scraper to help with project sourcing. As a disclaimer, it does not scrape emails. It attempts to scrape the names of people who have worked at a particular company with a particular role.
 
-## Usage
+## Installation
 Dependencies are currently supported on Python 3 and Python 2.7.X and can be found in `requirements.txt`.
 To setup the scraper, open Terminal and run the following commands.
 ```
@@ -12,24 +12,29 @@ pip install -r requirements.txt
 
 Next, download `chromedriver` from [here](https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/) and move the executable file into the Sourcing directory.
 
+## Usage
 Open `emails.py` in your favorite editor and make the following changes:
-1. On line 27, update `TITLES` to the roles you want to scrape for. Default are Data Scientist, Manager, Director.
+1. On line 27, update `TITLES` to the positions you want to scrape for. Default are Data Scientist, Manager, Director.
 2. On line 29, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 7.
 3. On line 31, update `USERNAME_AUTH` to your LinkedIn username.
 4. On line 32, update `PASSWORD_AUTH` to your LinkedIn password.
 5. On line 34, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
 
-Before running the scraper, make sure the following`.xlsx` files are in your current working directory:
-* `Company List.xlsx`
-* `sourcing.xlsx`
+Open `Company List.xlsx` and make the following changes:
+1. `Company List.xlsx` should have the word "Company" in A1. For each company you would like to get contacts from, add the Company name exactly as it appears on LinkedIn in Column A below Company (one company per row).
 
-`Company List.xlsx` should have the word "Company" in A1. For each company you would like to get contacts from, add the Company name exactly as it appears on LinkedIn in column A below Company (one company per row).
+Finally, in the Sourcing directory, run `python3 main.py`
 
-`sourcing.xlsx` should be a blank file and will contain the outputs of the scraping.
+Enter your Hunter.io API Key when prompted. [See Hunter.io API Key for setup instructions](##hunter.io-api-key).
 
-Finally, in the Sourcing directory, run `python3 emails.py`
+Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets.
 
-Open `sourcing.xlsx`, and you should see the output, which you can then copy over to Google Sheets.
+## Hunter.io API Key
+Because this application uses Hunter.io's API, individual users are required to create an API Key to use (API Requests are throttled). To generate a Hunter.io API Key:
+1. Visit Hunter.io to create an account. 
+2. After creating an account, go to your name in the top right corner -> API. Copy and paste your API secret key
+3. You are able to access your personal API Key and view your Hunter.io API Usage.
+4. Should you run out of monthly requests (50 companies per month), simply make a new account and get a new key.
 
 ## Debugging
 The file for `chromedriver` is not found:
@@ -55,3 +60,7 @@ File "emails.py", line 141, in <module>
 AttributeError: 'NoneType' object has no attribute 'click'
 ```
 Fix: Quit the current running instance and close the Chrome window. On line 147 in `emails.py`, try increasing the number of seconds in `time.sleep(3)` by a little.
+
+## Authors
+* [Eric Gan](https://github.com/eric-gan)
+* [Rick Zhang](https://github.com/wsxdrorange)
