@@ -25,14 +25,14 @@ Open `Company List.xlsx` and make the following changes:
 
 Finally, in the Sourcing directory, run `python3 main.py`
 
-Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructions](##hunter-api-key).
+Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructions](#hunter-api-key).
 
 Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets.
 
 ## Hunter API Key
 Because this application uses Hunter.io's API, individual users are required to create an API Key to use (API Requests are throttled). To generate a Hunter.io API Key:
 1. Visit [Hunter.io](https://hunter.io) to create an account. 
-2. After creating an account, go to your name in the top right corner -> API. Copy and paste your API secret key
+2. After creating an account, go to your name in the top right corner and select API in the dropdown. Copy and paste your API secret key
 3. You are able to access your personal API Key and view your Hunter.io API Usage.
 4. Should you run out of monthly requests (50 companies per month), simply make a new account and get a new key.
 
