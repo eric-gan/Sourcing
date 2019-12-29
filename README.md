@@ -21,7 +21,7 @@ Open `emails.py` in your favorite editor and make the following changes:
 5. On line 34, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
 
 Open `Company List.xlsx` and make the following changes:
-1. `Company List.xlsx` should have the word "Company" in A1. For each company you would like to get contacts from, add the Company name exactly as it appears on LinkedIn in Column A below Company (one company per row).
+1. `Company List.xlsx` should have the word "Company" in A1. For each company you would like to get contacts from, add the Company name **exactly as it appears on LinkedIn** in Column A below Company (one company per row).
 
 Finally, in the Sourcing directory, run `python3 main.py`
 
