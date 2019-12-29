@@ -61,7 +61,7 @@ class Sourcer:
         # Replace email address column with valid emails
         self.client_info_df['Email Address'] = self.client_info_df.apply(
             lambda row: replace_email_format(row['Company'], row['First Name'], row['Last Name']), axis=1)
-        print(self.client_info_df)
+        # print(self.client_info_df)
 
         # Write Email Addresses Only to output CSV (debugging)
         # email_address_df = self.client_info_df['Email Address']
