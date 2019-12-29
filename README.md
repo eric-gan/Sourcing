@@ -14,7 +14,7 @@ Next, download `chromedriver` from [here](https://chromedriver.storage.googleapi
 
 ## Usage
 Open `scraper.py` in your favorite editor and make the following changes:
-1. On line 26, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Manager, Director.
+1. On line 26, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Data Engineer, Machine Learning Engineer, Product Manager, and Engineering Manager.
 2. On line 28, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 7.
 3. On line 30, update `USERNAME_AUTH` to your LinkedIn username.
 4. On line 31, update `PASSWORD_AUTH` to your LinkedIn password.
@@ -59,7 +59,14 @@ File "scraper.py", line 141, in <module>
     all_filters_button.click()
 AttributeError: 'NoneType' object has no attribute 'click'
 ```
-Fix: Quit the current running instance and close the Chrome window. On line 128 in `scraper.py`, try increasing the number of seconds in `time.sleep(3)` by a little.
+Fix: Quit the current running instance and **quit chrome** all together and rerun. If that does not work, on line 128 in `scraper.py`, try increasing the number of seconds in `time.sleep(3)` by a little.
+
+
+Permission Error
+```
+PermissionError: [Errno 13] Permission denied: 'sourcing.csv'
+```
+Fix: Make sure you delete any existing 'sourcing.csv' before running again.
 
 ## Authors
 * [Eric Gan](https://github.com/eric-gan)
