@@ -23,14 +23,14 @@ import time
 # Company list can be imported from excel or hardcoded as a list
 company_lst = list(pd.read_excel("Company List.xlsx")['Company'])
 # Change this list according to titles you want to scrape for
-TITLES = ["Data Scientist", "Director", "Manager"]
+TITLES = ["Data Scientist", "Data Engineer", "Product Manager"]
 # Change this number to determine the scrape page depth on Linkedin
-PAGE_DEPTH = 7
+PAGE_DEPTH = 5
 # Change this to your LinkedIn Account
-USERNAME_AUTH = "linkedin.user@gmail.com"
-PASSWORD_AUTH = "linkedin.password"
+USERNAME_AUTH = "rickzhang@berkeley.edu"
+PASSWORD_AUTH = "Killertater9"
 # Change this to your Webdriver Path
-DRIVER_PATH = '/path/to/webdriver/'
+DRIVER_PATH = '/Users/rickzhang/Documents/Programming/Python/Sourcing/chromedriver'
 
 
 def run():
@@ -125,7 +125,7 @@ def run():
             "https://www.linkedin.com/search/results/people/?origin=DISCOVER_FROM_SEARCH_HOME")
 
         # ALL FILTERS BUTTON
-        time.sleep(3)
+        time.sleep(7)
         button_elements = browser.find_elements_by_tag_name("button")
         all_filters_button = button_locator(button_elements, "all_filters")
         all_filters_button.click()
