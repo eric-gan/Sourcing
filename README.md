@@ -1,5 +1,5 @@
 # Sourcing
-The following repository provides an automated scraper to help with project sourcing. As a disclaimer, it does not scrape emails. It attempts to scrape the names of people who have worked at a particular company with a particular role.
+The following repository provides an automated scraper to help with project sourcing. As a disclaimer, it does not scrape emails. It attempts to scrape the names of people who have worked at a particular company with a particular role and "guess" the email format using the Hunter.io API.
 
 ## Installation
 Dependencies are currently supported on Python 3 and Python 2.7.X and can be found in `requirements.txt`.
