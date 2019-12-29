@@ -32,9 +32,11 @@ PASSWORD_AUTH = "linkedin.password"
 # Change this to your Webdriver Path
 DRIVER_PATH = '/path/to/webdriver/'
 
+
 def run():
     # Initialize sourcing dataframe
-    df = pd.DataFrame(columns=['First Name', 'Last Name', 'Name', 'Position', 'Company', 'Email Address'])
+    df = pd.DataFrame(columns=['First Name', 'Last Name',
+                               'Name', 'Position', 'Company', 'Email Address'])
     curr_row = 0
 
     def secondary_security(browser):
@@ -44,7 +46,6 @@ def run():
         except Exception as e:
             pass
 
-
     def input_locator(elements, field):
         elements = [
             element for element in elements if element.get_attribute("type") == "text"]
@@ -52,12 +53,10 @@ def run():
             if field in element.get_attribute("placeholder"):
                 return element
 
-
     def button_locator(elements, field):
         for element in elements:
             if field == element.get_attribute("data-control-name"):
                 return element
-
 
     def scrape(driver, url, row, company):
         for page in range(1, PAGE_DEPTH + 1):  # change to desired page range
@@ -84,10 +83,10 @@ def run():
                 # print(name.contents[0] + "--->" + position.contents[0])
                 curr_name = name.contents[0]
                 curr_name_split = curr_name.split()
-                df.loc[row] = [curr_name_split[0], curr_name_split[-1], curr_name, position.contents[0], company, None]
+                df.loc[row] = [curr_name_split[0], curr_name_split[-1],
+                               curr_name, position.contents[0], company, None]
                 row += 1
         return row
-
 
     def page_has_loaded(driver):
         page_state = driver.execute_script('return document.readyState;')
@@ -101,7 +100,6 @@ def run():
     # chrome_options.binary_location = '/Applications/Google Chrome'
 
     # browser = webdriver.Chrome(executable_path="chromedriver.exe",   chrome_options=chrome_options)
-
 
     browser = webdriver.Chrome(executable_path=DRIVER_PATH)
 

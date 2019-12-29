@@ -13,12 +13,12 @@ pip install -r requirements.txt
 Next, download `chromedriver` from [here](https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/) and move the executable file into the Sourcing directory.
 
 ## Usage
-Open `emails.py` in your favorite editor and make the following changes:
-1. On line 27, update `TITLES` to the positions you want to scrape for. Default are Data Scientist, Manager, Director.
-2. On line 29, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 7.
-3. On line 31, update `USERNAME_AUTH` to your LinkedIn username.
-4. On line 32, update `PASSWORD_AUTH` to your LinkedIn password.
-5. On line 34, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
+Open `scraper.py` in your favorite editor and make the following changes:
+1. On line 26, update `TITLES` to the positions you want to scrape for. Default are Data Scientist, Manager, Director.
+2. On line 28, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 7.
+3. On line 30, update `USERNAME_AUTH` to your LinkedIn username.
+4. On line 31, update `PASSWORD_AUTH` to your LinkedIn password.
+5. On line 33, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
 
 Open `Company List.xlsx` and make the following changes:
 1. `Company List.xlsx` should have the word "Company" in A1. For each company you would like to get contacts from, add the Company name **exactly as it appears on LinkedIn** in Column A below Company (one company per row).
@@ -50,16 +50,16 @@ The `chromedriver` executable needs to be in PATH
 selenium.common.exceptions.WebDriverException: Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
 ```
 
-Fix: Makes sure you have downloaded `chromedriver` and it is in your Sourcing directory. Open `emails.py` and on line 34, make sure `DRIVER_PATH` contains the full path to the chromedriver.
+Fix: Makes sure you have downloaded `chromedriver` and it is in your Sourcing directory. Open `scraper.py` and on line 33, make sure `DRIVER_PATH` contains the full path to the chromedriver.
 
 
 Scraper stops halfway with this message
 ```
-File "emails.py", line 141, in <module>
+File "scraper.py", line 141, in <module>
     all_filters_button.click()
 AttributeError: 'NoneType' object has no attribute 'click'
 ```
-Fix: Quit the current running instance and close the Chrome window. On line 147 in `emails.py`, try increasing the number of seconds in `time.sleep(3)` by a little.
+Fix: Quit the current running instance and close the Chrome window. On line 128 in `scraper.py`, try increasing the number of seconds in `time.sleep(3)` by a little.
 
 ## Authors
 * [Eric Gan](https://github.com/eric-gan)

@@ -4,6 +4,7 @@ import scraper
 
 import os
 
+
 def main():
     print('Starting Email Sourcer:\n')
     hunter_api_key = input('Enter hunter.io api key: ')
@@ -20,6 +21,7 @@ def main():
     print('DONE')
     print("Your file is located at: " + os.getcwd() + '/sourcing.csv')
     return 0
+
 
 if __name__ == "__main__":
     main()
