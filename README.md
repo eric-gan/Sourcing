@@ -14,7 +14,7 @@ Next, download `chromedriver` from [here](https://chromedriver.storage.googleapi
 
 ## Usage
 Open `scraper.py` in your favorite editor and make the following changes:
-1. On line 26, update `TITLES` to the positions you want to scrape for. Default are Data Scientist, Manager, Director.
+1. On line 26, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Manager, Director.
 2. On line 28, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 7.
 3. On line 30, update `USERNAME_AUTH` to your LinkedIn username.
 4. On line 31, update `PASSWORD_AUTH` to your LinkedIn password.
