@@ -27,7 +27,7 @@ Finally, in the Sourcing directory, run `python3 main.py`
 
 Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructions](#hunter-api-key).
 
-Two Methods of Usage:
+<strong>Two Methods of Usage:</strong>
 1. Creating New Info Sheet (Scraping LinkedIn)
 
    Pull new data off LinkedIn. To generate new sourcing data, specify the companies, titles, and page depth you wish to source according to the instructions above and a completed CSV will be generated.
