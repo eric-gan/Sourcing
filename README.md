@@ -27,7 +27,13 @@ Finally, in the Sourcing directory, run `python3 main.py`
 
 Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructions](#hunter-api-key).
 
-Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets. If emails do not appear for a company, the format will need to be manually scraped from Hunter, and merged in using an Excel function.
+Two Methods of Usage:
+1. Creating New Info Sheet (Scraping LinkedIn)
+   Pull new data off LinkedIn. To generate new sourcing data, specify the companies, titles, and page depth you wish to source according to the instructions above and a completed CSV will be generated.
+2. Modifying Email Pattern on Existing Sheet
+   Use this option to modify an incorrect email format from hunter.io or to quickly fill out email information for any given companies. To properly use this option, you must already have a `sourcing.csv` file with all information except for `Email Address` completed. This option requires you to manually provide email patterns for given companies. To do so, fill out the number of companies you wish to fill emails for, the company name as listed on your Spreadsheet, and the email format as listed on Hunter.io (e.g {first}{last}@company.com).
+
+Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets. As a reminder, please double check ALL email names and domain names before sending sourcing emails, as this is not perfect. If emails do not appear for a company, the format will need to be manually scraped from Hunter, and merged in using Option 2 (Modifying Email Pattern on Existing Sheet) or an Excel funtion.
 
 ## Hunter API Key
 Because this application uses Hunter.io API, individual users are required to create an API Key to use (API Requests are throttled). To generate a Hunter.io API Key:
