@@ -25,7 +25,7 @@ company_lst = list(pd.read_excel("Company List.xlsx")['Company'])
 # Change this list according to titles you want to scrape for
 TITLES = ["Data Scientist", "Data Engineer", "Machine Learning Engineer", "Product Manager", "Engineering Manager"]
 # Change this number to determine the scrape page depth on Linkedin
-PAGE_DEPTH = 5
+PAGE_DEPTH = 3
 # Change this to your LinkedIn Account
 USERNAME_AUTH = "linkedin.user@gmail.com"
 PASSWORD_AUTH = "linkedin.password"
