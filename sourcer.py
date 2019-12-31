@@ -30,6 +30,8 @@ class Sourcer:
         def replace_email_format(company, firstName, lastName):
             firstName = firstName.lower()
             lastName = lastName.lower()
+            if company not in email_address_map:
+                return None
             pattern = email_address_map[company]
             if pattern is None:
                 return None
