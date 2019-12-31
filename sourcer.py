@@ -27,11 +27,11 @@ class Sourcer:
     def fill_emails(self, custom_pattern=None):
 
         # Applied function to get email for individual based on company pattern
-        def replace_email_format(company, firstName, lastName):
+        def replace_email_format(company, firstName, lastName, default):
             firstName = firstName.lower()
             lastName = lastName.lower()
             if company not in email_address_map:
-                return None
+                return default
             pattern = email_address_map[company]
             if pattern is None:
                 return None
@@ -81,7 +81,7 @@ class Sourcer:
 
         # Replace email address column with valid emails
         self.client_info_df['Email Address'] = self.client_info_df.apply(
-            lambda row: replace_email_format(row['Company'], row['First Name'], row['Last Name']), axis=1)
+            lambda row: replace_email_format(row['Company'], row['First Name'], row['Last Name'], default=row['Email Address']), axis=1)
         # print(self.client_info_df)
 
         # Write Email Addresses Only to output CSV (debugging)
