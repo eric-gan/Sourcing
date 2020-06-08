@@ -118,5 +118,7 @@ venv.bak/
 # Sourcing CSV
 /sourcing.csv
 
+*.xlsx
+
 
 
