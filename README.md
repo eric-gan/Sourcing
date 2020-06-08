@@ -13,7 +13,7 @@ pip install -r requirements.txt
 Next, download `chromedriver` from [here](https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/) and move the executable file into the Sourcing directory.
 
 ## Usage
-Open `scraper.py` in your favorite editor and make the following changes:
+Open `config.json` in your favorite editor and make the following changes:
 1. On line 26, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Data Engineer, Machine Learning Engineer, Product Manager, and Engineering Manager.
 2. On line 28, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 3.
 3. On line 30, update `USERNAME_AUTH` to your LinkedIn username.
@@ -38,6 +38,8 @@ Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructi
 Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets. As a reminder, please double check ALL email names and domain names before sending sourcing emails, as this is not perfect. If emails do not appear for a company, the format will need to be manually scraped from Hunter, and merged in using Option 2 (Modifying Email Pattern on Existing Sheet) or an Excel funtion.
 
 ## Hunter API Key
+NOTE: You can leave Hunter.io API key as an empty string when prompted and still gather all other data from LinkedIn. If you would like to use Hunter.io API to automatically fill in the emails follow the instructions below.
+
 Because this application uses Hunter.io API, individual users are required to create an API Key to use (API Requests are throttled). To generate a Hunter.io API Key:
 1. Visit [Hunter.io](https://hunter.io) to create an account. 
 2. After creating an account, go to your name in the top right corner and select API in the dropdown. Copy and paste your API secret key
