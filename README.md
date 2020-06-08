@@ -81,3 +81,4 @@ Fix: Make sure you delete any existing 'sourcing.csv' before running again.
 ## Authors
 * [Eric Gan](https://github.com/eric-gan)
 * [Rick Zhang](https://github.com/wsxdrorange)
+* [Samir Puranik](https://github.com/samir-puranik)
