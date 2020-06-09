@@ -18,25 +18,33 @@ import re
 import requests
 import sys
 import time
+import json
+
+with open('config.json', 'r') as config_file:
+    config_data = config_file.read()
+    CONFIG = json.loads(config_data)
+    config_file.close()
 
 # CHANGE THIS SECTION TO FIT SOURCING NECESSITIES
 # Company list can be imported from excel or hardcoded as a list
 company_lst = list(pd.read_excel("Company List.xlsx")['Company'])
+
+
+# If you want to change configuration options, please change in config.json. DO NOT change directly.
 # Change this list according to titles you want to scrape for
-TITLES = ["Data Scientist", "Data Engineer", "Machine Learning Engineer", "Product Manager", "Engineering Manager", "Recruiter"]
-# Change this number to determine the scrape page depth on Linkedin
-PAGE_DEPTH = 3
-# Change this to your LinkedIn Account
-USERNAME_AUTH = "linkedin.user@gmail.com"
-PASSWORD_AUTH = "linkedin.password"
-# Change this to your Webdriver Path
-DRIVER_PATH = '/path/to/webdriver/'
+TITLES = CONFIG["TITLES"] # ["Data Scientist", "Data Engineer", "Machine Learning Engineer", "Product Manager", "Engineering Manager", "Recruiter"]
+PAGE_DEPTH = CONFIG["PAGE_DEPTH"] # Change this number to determine the scrape page depth on Linkedin
+USERNAME_AUTH = CONFIG["USERNAME_AUTH"] # Change this to your LinkedIn Account username
+PASSWORD_AUTH = CONFIG["PASSWORD_AUTH"] # Change this to your LinkedIn Account password
+DRIVER_PATH = CONFIG["DRIVER_PATH"] # Change this to your Webdriver Path
 
 
 def run():
     # Initialize sourcing dataframe
-    df = pd.DataFrame(columns=['First Name', 'Last Name',
-                               'Name', 'Position', 'Company', 'Email Address'])
+    df_columns = ['First Name', 'Last Name', 'Name', 'Position', 'Company', 'Email Address']
+    df_data = {x: [] for x in df_columns} # Initialize all column data to be empty
+    # df = pd.DataFrame(columns=['First Name', 'Last Name',
+    #                            'Name', 'Position', 'Company', 'Email Address'])
     curr_row = 0
 
     def secondary_security(browser):
@@ -77,14 +85,35 @@ def run():
 
             source_code = driver.page_source
             soup = BeautifulSoup(source_code)
-            iterator = zip(soup.findAll(
-                "span", {"class": "name actor-name"}), soup.findAll("span", {"dir": "ltr"}))
+            time.sleep(.5)
+
+            # Retrieve Names and Positions, and make list of tuples containing this info.
+            html_names = soup.findAll("span", {"class": "name actor-name"}) # Person Name
+            time.sleep(1)
+            html_roles = soup.findAll("p", {"class": "subline-level-1"}) # Person's Position
+            time.sleep(1)
+            iterator = zip(
+                html_names, # Names
+                html_roles # Positions
+                )
+
             for name, position in iterator:
                 # print(name.contents[0] + "--->" + position.contents[0])
                 curr_name = name.contents[0]
                 curr_name_split = curr_name.split()
-                df.loc[row] = [curr_name_split[0], curr_name_split[-1],
-                               curr_name, position.contents[0], company, None]
+                first_name = curr_name_split[0]
+                last_name = curr_name_split[-1]
+                full_name = curr_name
+                position_title = position.contents[0].strip()
+
+                # df.loc[row] = [curr_name_split[0], curr_name_split[-1],
+                #                curr_name, position.contents[0].strip(), company, None]
+                df_data["First Name"].append(first_name)
+                df_data["Last Name"].append(last_name)
+                df_data["Name"].append(full_name)
+                df_data["Position"].append(position_title)
+                df_data["Company"].append(company)
+                df_data["Email Address"].append("")
                 row += 1
         return row
 
@@ -109,10 +138,16 @@ def run():
             browser.get("https://www.linkedin.com")
             browser.find_element_by_class_name("nav__button-secondary").click()
             username = browser.find_element_by_id("username")
+            time.sleep(1)
             username.send_keys(USERNAME_AUTH)
+            time.sleep(1)
             password = browser.find_element_by_id("password")
+            time.sleep(1)
             password.send_keys(PASSWORD_AUTH)
-            password.submit()
+            time.sleep(1)
+            signin = browser.find_element_by_class_name("btn__primary--large")
+            signin.click()
+            time.sleep(1.5)
             break
         except Exception as e:
             browser.close()
@@ -121,11 +156,15 @@ def run():
 
     for company in tqdm(company_lst):
         # FILTER PAGE
-        browser.get(
-            "https://www.linkedin.com/search/results/people/?origin=DISCOVER_FROM_SEARCH_HOME")
+        # browser.get(
+        #     "https://www.linkedin.com/search/results/people/?origin=DISCOVER_FROM_SEARCH_HOME"
+        #     )
+        # Enter Locations US and San Francisco Bay Area Manually
+        query_string = "facetGeoRegion=%5B%22us%3A0%22%2C%22us%3A84%22%5D&origin=FACETED_SEARCH"
+        browser.get("https://www.linkedin.com/search/results/people/?{}".format(query_string))
+        time.sleep(2)
 
         # ALL FILTERS BUTTON
-        time.sleep(3)
         button_elements = browser.find_elements_by_tag_name("button")
         all_filters_button = button_locator(button_elements, "all_filters")
         all_filters_button.click()
@@ -136,8 +175,8 @@ def run():
 
         # FILTER LOCATIONS
         location_elem = input_locator(input_elements, "country/region")
-        locations = ["United States", "San Francisco Bay Area"]
-        for location in locations:
+        additional_locations = [] # Only add locations not in ["United States", "San Francisco Bay Area"]
+        for location in additional_locations:
             location_elem.send_keys(location)
             time.sleep(1)
             location_elem.send_keys(Keys.DOWN, Keys.RETURN)
@@ -155,7 +194,7 @@ def run():
         apply_button.click()
 
         # BASE FILTER URL
-        time.sleep(3)
+        time.sleep(1.5)
         filter_url = browser.current_url
         # print("Filter URL is: " + filter_url)
 
@@ -164,6 +203,8 @@ def run():
             title_url = filter_url + "&title=" + title
             curr_row = scrape(browser, title_url, curr_row, company)
 
-    df.to_csv('sourcing.csv', index=False)
+    df = pd.DataFrame(data=df_data)
+    df.to_csv('sourcing.csv')
 
     print("Linkedin email scraping is complete.")
+

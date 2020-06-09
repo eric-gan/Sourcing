@@ -108,3 +108,17 @@ venv.bak/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Chromedriver
+/chromedriver
+
+# Config file
+/config.json
+
+# Sourcing CSV
+/sourcing.csv
+
+*.xlsx
+
+
+
