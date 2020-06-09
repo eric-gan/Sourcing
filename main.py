@@ -7,7 +7,7 @@ import os
 
 def main():
     print('Starting Email Sourcer:\n')
-    hunter_api_key = input('Enter hunter.io api key: ')
+    hunter_api_key = input('Enter hunter.io api key (Press Enter for no Hunter.io email lookups): ')
     existing_info_ind = input('1. Creating New Info Sheet (Scraping LinkedIn)\n2. Modifying Email Pattern on Existing Sheet\nChoose Option (1/2): ')
     if existing_info_ind == '1':
         # run scraper
