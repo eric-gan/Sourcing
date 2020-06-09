@@ -14,11 +14,11 @@ Next, download `chromedriver` from [here](https://chromedriver.chromium.org/) (C
 
 ## Usage
 Open `config.json` in your favorite editor and make the following changes:
-1. On line 26, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Data Engineer, Machine Learning Engineer, Product Manager, and Engineering Manager.
-2. On line 28, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 3.
-3. On line 30, update `USERNAME_AUTH` to your LinkedIn username.
-4. On line 31, update `PASSWORD_AUTH` to your LinkedIn password.
-5. On line 33, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
+1. On line 2, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Data Engineer, Machine Learning Engineer, Product Manager, Engineering Manager, and Recruiter.
+2. On line 3, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 3.
+3. On line 4, update `USERNAME_AUTH` to your LinkedIn username.
+4. On line 5, update `PASSWORD_AUTH` to your LinkedIn password.
+5. On line 6, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
 
 Open `Company List.xlsx` and make the following changes:
 1. `Company List.xlsx` should have the word "Company" in A1. For each company you would like to get contacts from, add the Company name **exactly as it appears on LinkedIn** in Column A below Company (one company per row).
@@ -36,6 +36,8 @@ Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructi
    Use this option to modify an incorrect email format from hunter.io or to quickly fill out email information for any given companies. To properly use this option, you must already have a `sourcing.csv` file with all information except for `Email Address` completed. This option requires you to manually provide email patterns for given companies. To do so, fill out the number of companies you wish to fill emails for, the company names as listed on your Spreadsheet, and the email formats as listed on Hunter.io (e.g {first}{last}@company.com).
 
 Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets. As a reminder, please double check ALL email names and domain names before sending sourcing emails, as this is not perfect. If emails do not appear for a company, the format will need to be manually scraped from Hunter, and merged in using Option 2 (Modifying Email Pattern on Existing Sheet) or an Excel funtion.
+
+<strong> Note: Please limit the amount of searches you make using automated sourcing as LinkedIn will mark you as a power searcher (warning) and you could eventually get banned. LinkedIn will notify you of power searching. <strong>
 
 ## Hunter API Key
 NOTE: You can leave Hunter.io API key as an empty string when prompted and still gather all other data from LinkedIn. If you would like to use Hunter.io API to automatically fill in the emails follow the instructions below.
