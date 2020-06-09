@@ -10,7 +10,7 @@ cd Sourcing
 pip install -r requirements.txt
 ```
 
-Next, download `chromedriver` from [here](https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/) and move the executable file into the Sourcing directory.
+Next, download `chromedriver` from [here](https://chromedriver.chromium.org/) (Current Stable Release -> download your OS's chromedriver) and move the executable file into the Sourcing directory.
 
 ## Usage
 Open `config.json` in your favorite editor and make the following changes:
@@ -77,6 +77,22 @@ Permission Error
 PermissionError: [Errno 13] Permission denied: 'sourcing.csv'
 ```
 Fix: Make sure you delete any existing 'sourcing.csv' before running again.
+
+
+Before Chrome is opened, verification issue message pops up (on Mac)
+```
+“chromedriver” cannot be opened because the developer cannot be verified.
+```
+
+and/or this error appears from Python in the terminal:
+```
+selenium.common.exceptions.WebDriverException: Message: Service /Users/Samir/uc-berkeley/dss/dss-sourcing/Sourcing/chromedriver unexpectedly exited. Status code was: -9
+```
+
+Fix:
+Type the following command into the terminal (for Mac):
+`xattr -d com.apple.quarantine /path/to/chromedriver`
+
 
 ## Authors
 * [Eric Gan](https://github.com/eric-gan)
