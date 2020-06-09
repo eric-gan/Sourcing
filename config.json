@@ -1,0 +1,7 @@
+{
+    "TITLES": ["Data Scientist", "Data Engineer", "Machine Learning Engineer", "Product Manager", "Engineering Manager", "Recruiter"],
+    "PAGE_DEPTH": 3,
+    "USERNAME_AUTH": "linkedin.user@gmail.com",
+    "PASSWORD_AUTH": "linkedin.password",
+    "DRIVER_PATH": "/path/to/webdriver/chromedriver"
+}
