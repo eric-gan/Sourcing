@@ -37,7 +37,7 @@ Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructi
 
 Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets. As a reminder, please double check ALL email names and domain names before sending sourcing emails, as this is not perfect. If emails do not appear for a company, the format will need to be manually scraped from Hunter, and merged in using Option 2 (Modifying Email Pattern on Existing Sheet) or an Excel funtion.
 
-<strong> Note: Please limit the amount of searches you make using automated sourcing as LinkedIn will mark you as a power searcher (warning) and you could eventually get banned. LinkedIn will notify you of power searching. <strong>
+<strong> Note: Please limit the amount of searches you make using automated sourcing as LinkedIn will mark you as a power searcher (warning) and you could eventually get banned. LinkedIn will notify you of power searching. </strong>
 
 ## Hunter API Key
 NOTE: You can leave Hunter.io API key as an empty string when prompted and still gather all other data from LinkedIn. If you would like to use Hunter.io API to automatically fill in the emails follow the instructions below.
