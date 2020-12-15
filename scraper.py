@@ -27,7 +27,7 @@ with open('config.json', 'r') as config_file:
 
 # CHANGE THIS SECTION TO FIT SOURCING NECESSITIES
 # Company list can be imported from excel or hardcoded as a list
-company_lst = list(pd.read_excel("Company List.xlsx")['Company'])
+company_lst = list(pd.read_excel("Company List.xlsx", engine='openpyxl')['Company'])
 
 
 # If you want to change configuration options, please change in config.json. DO NOT change directly.
@@ -62,7 +62,9 @@ def run():
                 return element
 
     def button_locator(elements, field):
+        print("new call")
         for element in elements:
+            print(element.get_attribute("data-control-name"))
             if field == element.get_attribute("data-control-name"):
                 return element
 
@@ -162,7 +164,7 @@ def run():
         # Enter Locations US and San Francisco Bay Area Manually
         query_string = "facetGeoRegion=%5B%22us%3A0%22%2C%22us%3A84%22%5D&origin=FACETED_SEARCH"
         browser.get("https://www.linkedin.com/search/results/people/?{}".format(query_string))
-        time.sleep(2)
+        time.sleep(5)
 
         # ALL FILTERS BUTTON
         button_elements = browser.find_elements_by_tag_name("button")
@@ -187,10 +189,12 @@ def run():
         company_elem.send_keys(company)
         time.sleep(1)
         company_elem.send_keys(Keys.DOWN, Keys.RETURN)
-        time.sleep(1)
+        time.sleep(3)
 
         # APPLY FILTERS
-        apply_button = button_locator(button_elements, "all_filters_apply")
+        print(button_elements)
+        apply_button = browser.find_element_by_class_name("search-advanced-facets__button--apply")
+        # apply_button = button_locator(button_elements, "all_filters_apply")
         apply_button.click()
 
         # BASE FILTER URL
