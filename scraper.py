@@ -137,7 +137,7 @@ def run():
     while True:
         try:
             browser.implicitly_wait(30)
-            browser.get("https://www.linkedin.com")
+            browser.get("https://www.linkedin.com/home")
             browser.find_element_by_class_name("nav__button-secondary").click()
             username = browser.find_element_by_id("username")
             time.sleep(1)
