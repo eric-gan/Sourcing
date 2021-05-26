@@ -10,22 +10,36 @@ cd Sourcing
 pip install -r requirements.txt
 ```
 
-Next, download `chromedriver` from [here](https://chromedriver.chromium.org/) (Current Stable Release -> download your OS's chromedriver) and move the executable file into the Sourcing directory.
+Next, download `chromedriver` from [here](https://chromedriver.chromium.org/) (Latest stable release -> download your OS's chromedriver) and move the executable file into the Sourcing directory.
+
+Finally, make sure your Google Chrome is installed in the [default location](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver#requirements) for your OS (otherwise, configuring the scraper to work may be a tad bit messier than needed). 
 
 ## Usage
 Open `config.json` in your favorite editor and make the following changes:
-1. On line 2, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Data Engineer, Machine Learning Engineer, Product Manager, Engineering Manager, and Recruiter.
-2. On line 3, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 3.
-3. On line 4, update `USERNAME_AUTH` to your LinkedIn username.
-4. On line 5, update `PASSWORD_AUTH` to your LinkedIn password.
-5. On line 6, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
+1. On line 2, update `TITLES` to the positions you want to scrape for. Defaults are Data Scientist, Data Engineer, Machine Learning Engineer, Product Manager, and Engineering Manager.
+2. On line 3, update `LOCATIONS` to the locations you want to search for. Defaults are United States, San Francisco Bay Area, and Berkeley, California.
+3. On line 4, update `PAGE_DEPTH` to the number of LinkedIn pages you want to scrape. Default is 3.
+4. On line 5, update `USERNAME_AUTH` to your LinkedIn username.
+5. On line 6, update `PASSWORD_AUTH` to your LinkedIn password.
+5. On line 7, update `DRIVER_PATH` to the full path of `chromedriver.exe`. On Mac one can find the full path by right clicking on the file, holding option key, and clicking *Copy "chromedriver" as pathname*.
 
 Open `Company List.xlsx` and make the following changes:
 1. `Company List.xlsx` should have the word "Company" in A1. For each company you would like to get contacts from, add the Company name **exactly as it appears on LinkedIn** in Column A below Company (one company per row).
+2. **Do not scrape more than five companies at a time.**
 
-Finally, in the Sourcing directory, run `python3 main.py`
+## Hunter API Key Setup
+NOTE: You can leave Hunter.io API key as an empty string when prompted and still gather all other data from LinkedIn. If you would like to use Hunter.io API to automatically fill in the emails, follow the instructions below.
 
-Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructions](#hunter-api-key).
+Because this application uses Hunter.io API, individual users are required to create an API Key to use (API Requests are throttled). To generate a Hunter.io API Key:
+1. Visit [Hunter.io](https://hunter.io) to create an account. 
+2. After creating an account, go to your name in the top right corner and select API in the dropdown. Copy and paste your API secret key
+3. You are able to access your personal API Key and view your Hunter.io API Usage.
+4. Should you run out of monthly requests (50 companies per month), simply make a new account and get a new key.
+
+## Scraping
+In the Sourcing directory, run `python3 main.py`
+
+Enter your Hunter API Key when prompted.
 
 <strong>Two Methods of Usage:</strong>
 1. Creating New Info Sheet (Scraping LinkedIn)
@@ -38,16 +52,6 @@ Enter your Hunter API Key when prompted. [See Hunter API Key for setup instructi
 Open `sourcing.csv`, and you should see the output, which you can then copy over to Google Sheets. As a reminder, please double check ALL email names and domain names before sending sourcing emails, as this is not perfect. If emails do not appear for a company, the format will need to be manually scraped from Hunter, and merged in using Option 2 (Modifying Email Pattern on Existing Sheet) or an Excel funtion.
 
 <strong> Note: Please limit the amount of searches you make using automated sourcing as LinkedIn will mark you as a power searcher (warning) and you could eventually get banned. LinkedIn will notify you of power searching. </strong>
-
-## Hunter API Key
-NOTE: You can leave Hunter.io API key as an empty string when prompted and still gather all other data from LinkedIn. If you would like to use Hunter.io API to automatically fill in the emails follow the instructions below.
-
-Because this application uses Hunter.io API, individual users are required to create an API Key to use (API Requests are throttled). To generate a Hunter.io API Key:
-1. Visit [Hunter.io](https://hunter.io) to create an account. 
-2. After creating an account, go to your name in the top right corner and select API in the dropdown. Copy and paste your API secret key
-3. You are able to access your personal API Key and view your Hunter.io API Usage.
-4. Should you run out of monthly requests (50 companies per month), simply make a new account and get a new key.
-
 ## Debugging
 The file for `chromedriver` is not found:
 
@@ -100,3 +104,4 @@ Type the following command into the terminal (for Mac):
 * [Eric Gan](https://github.com/eric-gan)
 * [Rick Zhang](https://github.com/wsxdrorange)
 * [Samir Puranik](https://github.com/samir-puranik)
+* [Alina Trinh](https://github.com/tu-trinh)
