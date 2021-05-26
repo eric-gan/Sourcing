@@ -1,7 +1,8 @@
 {
-    "TITLES": ["Data Scientist", "Data Engineer", "Machine Learning Engineer", "Product Manager", "Engineering Manager", "Recruiter"],
+    "TITLES": ["Data Scientist"],
+    "LOCATIONS": ["United States", "San Francisco Bay Area", "Berkeley, California, United States"],
     "PAGE_DEPTH": 3,
-    "USERNAME_AUTH": "linkedin.user@gmail.com",
-    "PASSWORD_AUTH": "linkedin.password",
-    "DRIVER_PATH": "/path/to/webdriver/chromedriver"
+    "USERNAME_AUTH": "tutrinh@berkeley.edu",
+    "PASSWORD_AUTH": "LinkedinAreUs1",
+    "DRIVER_PATH": "/Users/tutrinh/Work/DSS/Sourcing/chromedriver"
 }
