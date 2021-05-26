@@ -101,9 +101,25 @@ def run():
             time.sleep(.5)
 
             # Retrieve Names and Positions, and make list of tuples containing this info.
-            html_names = soup.findAll("span", {"class": "name actor-name"}) # Person Name
+            # html_names = soup.findAll("span", {"class": "name actor-name"}) # Person Name
+            html_name_containers = soup.findAll("span", {"dir": "ltr"})
+            html_names = []
+            for name_container in html_name_containers:
+                search = re.search('<span aria-hidden=\"true\"><!-- -->([\w ]+)<!-- --></span>', str(name_container))
+                if search:
+                    html_names.append(search.group(1))
+                else:
+                    html_names.append("N/A")
             time.sleep(1)
-            html_roles = soup.findAll("p", {"class": "subline-level-1"}) # Person's Position
+            # # html_roles = soup.findAll("p", {"class": "subline-level-1"}) # Person's Position
+            html_role_containers = soup.findAll("div", {"class": "entity-result__primary-subtitle"})
+            html_roles = []
+            for role_container in html_role_containers:
+                search = re.search('<div class=\"entity-result__primary-subtitle t-14 t-black\">\n<!-- -->([\w ]+)<!-- -->\n</div>', str(role_container))
+                if search:
+                    html_roles.append(search.group(1))
+                else:
+                    html_roles.append("N/A")
             time.sleep(1)
             iterator = zip(
                 html_names, # Names
@@ -112,12 +128,12 @@ def run():
 
             for name, position in iterator:
                 # print(name.contents[0] + "--->" + position.contents[0])
-                curr_name = name.contents[0]
+                curr_name = name.strip()
                 curr_name_split = curr_name.split()
                 first_name = curr_name_split[0]
                 last_name = curr_name_split[-1]
                 full_name = curr_name
-                position_title = position.contents[0].strip()
+                position_title = position.strip()
 
                 # df.loc[row] = [curr_name_split[0], curr_name_split[-1],
                 #                curr_name, position.contents[0].strip(), company, None]
